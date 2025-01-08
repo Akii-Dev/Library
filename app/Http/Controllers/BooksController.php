@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use Illuminate\Http\Request;
 
 class BooksController extends Controller
@@ -12,7 +13,6 @@ class BooksController extends Controller
     public function index()
     {
         return view('books.index');
-
     }
 
     /**
@@ -28,7 +28,19 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate(
+            [
+                'title' => 'required|string|max:50',
+                'author' => 'required|string|max:50'
+            ]
+        );
+
+        Book::create([
+                'title' => $validated["title"],
+                'author' => $validated["author"],
+]);
+        // store
+        return redirect()->route('books.index');
     }
 
     /**

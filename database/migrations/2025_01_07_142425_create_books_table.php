@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('author');
-            $table->date('read_at');
+            $table->date('read_at')->nullable();
+            $table->date('deleted_at')->nullable();
             $table->timestamps();
         });
     }

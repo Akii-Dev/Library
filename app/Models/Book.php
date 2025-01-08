@@ -8,5 +8,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Book extends Model
 {
     use SoftDeletes;
-    //
+    
+    protected $fillable = [
+        'title',
+        'author',
+        'read_at'
+    ];
 }
