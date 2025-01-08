@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +10,14 @@
     <script src="../js/script.js" defer></script>
 
 </head>
+
 <body class="bg-orange-100">
     <div class="container mx-auto">
-    @yield('content')
-</div>
+        <div class="w-96 mx-auto p-4">
+            <h1 class="text-center text-xl font-semibold">Personal library</h1>
+            @yield('content')
+        </div>
+    </div>
 </body>
+
 </html>
