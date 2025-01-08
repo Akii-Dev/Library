@@ -12,7 +12,10 @@ class BooksController extends Controller
      */
     public function index()
     {
-        return view('books.index');
+        return view(
+            'books.index',
+            ['books' => Book::all()]
+        );
     }
 
     /**
@@ -36,10 +39,10 @@ class BooksController extends Controller
         );
 
         Book::create([
-                'title' => $validated["title"],
-                'author' => $validated["author"],
-]);
-        // store
+            'title' => $validated["title"],
+            'author' => $validated["author"],
+        ]);
+
         return redirect()->route('books.index');
     }
 
