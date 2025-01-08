@@ -9,7 +9,7 @@
     <script src="../js/script.js" defer></script>
 
 </head>
-<body>
+<body class="bg-orange-100">
     <div class="container mx-auto">
     @yield('content')
 </div>
