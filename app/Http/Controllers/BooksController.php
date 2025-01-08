@@ -19,7 +19,7 @@ class BooksController extends Controller
      */
     public function create()
     {
-        // gebruik deze
+        return view('books.add');
     }
 
     /**
