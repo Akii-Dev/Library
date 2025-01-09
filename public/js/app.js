@@ -1,19 +1,19 @@
+const checkboxes = document.querySelectorAll("#book-status input[type='checkbox']");
+for (let i = 0; i < checkboxes.length; i++) {
+    const checkbox = checkboxes[i];
+    checkbox.addEventListener('change', function () {
+        const bookid = checkbox.id;
+        const checked = checkbox.checked;
 
-function setupCheckbox() {
-    const books = document.querySelectorAll("#book-status input[type='checkbox']")
-    books.forEach(book => {
-        book.addEventListener("change", async () => {
-            const bookid = book.id
-            const checked = book.checked;
-            if (checked === true) {
-                document.getElementById(`bookp${bookid}`).innerText = "Finished";
-            } else if (checked === false) {
-                document.getElementById(`bookp${bookid}`).innerText = "On the shelf";
-            }
-
+        axios.put('/books/toggle-read', {
+            id: bookid, 
+            isRead: checked
         })
+        .then(function () {
+            document.getElementById(`bookp${bookid}`).innerText = checked ? "Finished" : "On the shelf";
+        })
+        .catch(function (error) {
+            console.error(error);
+        });
     });
-
 }
-
-setupCheckbox();
