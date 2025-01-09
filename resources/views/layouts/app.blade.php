@@ -7,7 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.css')
     <title>Document</title>
-    <script src="../js/script.js" defer></script>
+    <script src="../js/app.js" defer></script>
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+    
 
 </head>
 
