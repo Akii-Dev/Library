@@ -46,6 +46,20 @@ class BooksController extends Controller
         return redirect()->route('books.index');
     }
 
+    public function toggleRead(Request $request)
+{
+    $validated = $request->validate([
+        'id' => 'required|exists:books,id',
+    ]);
+
+    $book = Book::findOrFail($validated['id']);
+
+    $book->update([
+        'read_at' => $book->read_at ? null : date("y-m-d"),
+    ]);
+
+}
+
     /**
      * Display the specified resource.
      */
