@@ -7,12 +7,19 @@
                 <div class="flex flex-col mx-auto">
                     <label for="title" class="text-gray-600 font-bold mb-2">Title</label>
 
-                    <input class=" bg-orange-100 h-8 rounded-lg mb-4" type="text" name="title" id="title">
-                    <label for="author" class="text-gray-600 font-bold mb-2">Author</label>
+                    <input class=" bg-orange-100 h-8 rounded-lg" type="text" name="title" id="title" value="{{old('title')}}">
 
-                    <input class="bg-orange-100  h-8 rounded-lg mb-4" type="text" name="author" id="author">
+                    @error('title')
+                        <p class="text-red-500">{{$message}}</p>
+                    @enderror
+                    <label for="author" class="text-gray-600 font-bold mb-2 mt-4">Author</label>
 
-                    <input class="bg-yellow-700 h-8 text-white w-full mx-auto font-semibold rounded-lg" type="submit" name="" id="" value="Add book">
+                    <input class="bg-orange-100  h-8 rounded-lg" type="text" name="author" id="author" value="{{old('author')}}">
+                    @error('author')
+                        <p class="text-red-500">{{$message}}</p>
+                    @enderror
+
+                    <input class="bg-yellow-700 h-8 text-white mt-4 w-full mx-auto font-semibold rounded-lg" type="submit" name="" id="" value="Add book">
                 </div>
             </form>
         </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
 class BooksController extends Controller
@@ -33,9 +34,13 @@ class BooksController extends Controller
     {
         $validated = $request->validate(
             [
-                'title' => 'required|string|max:50',
-                'author' => 'required|string|max:50'
-            ]
+                'title' => ['required', 'string','max:50',
+                Rule::unique('books')->where(function ($query) use ($request) {
+                    return $query->where('author', $request->author);
+                }),],
+                'author' => ['required', 'string', 'max:50']
+            ],
+            ['title.unique' => 'This book is already in your library']
         );
 
         Book::create([
