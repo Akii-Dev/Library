@@ -109,6 +109,8 @@ class BooksController extends Controller
         );
 
         $book->update($validated);
+        session()->flash('status', "$book->title updated successfully!");
+
         return redirect()->route('books.index');
     }
 
@@ -118,6 +120,8 @@ class BooksController extends Controller
     public function destroy(Book $book)
     {
         $book->delete();
+
+        session()->flash('status', "$book->title deleted successfully!");
         return redirect()->route('books.index');
     }
 }
