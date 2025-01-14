@@ -15,7 +15,7 @@
 
 <body class="bg-orange-100">
     <div class="container mx-auto">
-        <div class="w-96 mx-auto p-4">
+        <div class="w-full mx-auto p-4">
             <h1 class="text-center text-xl font-semibold">Personal library</h1>
             @yield('content')
         </div>

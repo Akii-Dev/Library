@@ -27,6 +27,11 @@ class BooksController extends Controller
         return view('books.add');
     }
 
+    public function borrowers()
+    {
+        return view('books.borrowers');
+    }
+
     /**
      * Store a newly created resource in storage.
      */

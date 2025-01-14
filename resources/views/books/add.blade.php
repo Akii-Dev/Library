@@ -1,6 +1,6 @@
 @extends('components/layouts.app')
 @section('content')
-        <div class="bg-white w-96 p-4  rounded shadow-lg" >
+        <div class="bg-white w-96 mx-auto p-4  rounded shadow-lg" >
             <p class="text-center font-bold text-gray-600 mb-4">Add book</p>
             <form method="POST" action="/books">
                 @csrf

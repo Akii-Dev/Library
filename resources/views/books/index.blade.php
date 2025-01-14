@@ -2,7 +2,7 @@
 @section('content')
 
 @if(session('status'))
-    <p class="text-center text-lime-700 bg-white outline outline-lime-700 outline-2 font-semibold rounded-md py-4 my-2">
+    <p class="text-center text-lime-700 bg-white mx-auto w-96 outline outline-lime-700 outline-2 font-semibold rounded-md py-4 my-2">
         {{ session('status') }}
     </p>
 @endif
@@ -10,7 +10,7 @@
 
     @foreach ($books as $book)
     <a href="/books/{{ $book->id }}/edit">
-        <div class="bg-white shadow-lg m-2 p-2 text-sm rounded-md">
+        <div class="bg-white shadow-lg m-2 p-2 w-96 mx-auto text-sm rounded-md">
             <p class="text-gray-800 font-bold">{{ $book->title }}</p>
             <div class="flex justify-between">
                   <p class="text-gray-500 font-semibold">{{ $book->author }}</p>
