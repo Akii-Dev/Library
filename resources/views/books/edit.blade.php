@@ -30,7 +30,9 @@
                     <input class="bg-yellow-700 h-10 text-white mt-4 w-32 mx-auto font-semibold rounded-lg" type="submit"
                         name="" id="" value="Save">
         </form>
-        <form action="">
+        <form method="POST" action='{{ route('books.update', $id = $book->id) }}'>
+            @method("DELETE")
+            @csrf
             <input class="bg-red-700 h-10 text-white mt-4 w-32 mx-auto font-semibold rounded-lg" type="submit"
                 name="" id="" value="Delete">
         </form>
