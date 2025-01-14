@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
     <div class="bg-white w-96 p-4  rounded shadow-lg">
-        <p class="text-center font-bold text-gray-600 mb-4">Add book</p>
-        <form method="POST" action="/books.update">
-            @method("PUT")
+        <p class="text-center font-bold text-gray-600 mb-4">Edit book</p>
+        <form method="POST" action='{{ route('books.update', $id = $book->id) }}'>
+            @method('PUT')
             @csrf
             <div class="flex flex-col mx-auto">
                 <label for="title" class="text-gray-600 font-bold mb-2">Title</label>
@@ -22,19 +22,22 @@
                     <p class="text-red-500">{{ $message }}</p>
                 @enderror
 
-                <label for="start" class="mt-4 text-gray-600 font-bold mb-2 ">Read at</label>
+                <label for="date" class="mt-4 text-gray-600 font-bold mb-2 ">Read at</label>
 
-                <input class="bg-orange-100 h-8 rounded-lg" type="date" id="start" name="date"
-                    value="2024-01-01" />
+                <input class="bg-orange-100 h-8 rounded-lg" type="date" id="date" name="read_at"
+                value="{{ old('read_at') ?? ($book->read_at ? $book->read_at->format('Y-m-d') : '')}}"/>
                 <div class="flex">
-
-                    <input class="bg-red-700 h-10 text-white mt-4 w-32 mx-auto font-semibold rounded-lg" type="submit"
-                        name="" id="" value="Delete">
                     <input class="bg-yellow-700 h-10 text-white mt-4 w-32 mx-auto font-semibold rounded-lg" type="submit"
                         name="" id="" value="Save">
-                </div>
-            </div>
         </form>
+        <form action="">
+            <input class="bg-red-700 h-10 text-white mt-4 w-32 mx-auto font-semibold rounded-lg" type="submit"
+                name="" id="" value="Delete">
+        </form>
+
+    </div>
+    </div>
+
     </div>
     </div>
 @endsection

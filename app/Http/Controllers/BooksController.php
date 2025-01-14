@@ -34,10 +34,14 @@ class BooksController extends Controller
     {
         $validated = $request->validate(
             [
-                'title' => ['required', 'string','max:50',
-                Rule::unique('books')->where(function ($query) use ($request) {
-                    return $query->where('author', $request->author);
-                }),],
+                'title' => [
+                    'required',
+                    'string',
+                    'max:50',
+                    Rule::unique('books')->where(function ($query) use ($request) {
+                        return $query->where('author', $request->author);
+                    }),
+                ],
                 'author' => ['required', 'string', 'max:50']
             ],
             ['title.unique' => 'This book is already in your library']
@@ -52,18 +56,17 @@ class BooksController extends Controller
     }
 
     public function toggleRead(Request $request)
-{
-    $validated = $request->validate([
-        'id' => 'required|exists:books,id',
-    ]);
+    {
+        $validated = $request->validate([
+            'id' => 'required|exists:books,id',
+        ]);
 
-    $book = Book::findOrFail($validated['id']);
+        $book = Book::findOrFail($validated['id']);
 
-    $book->update([
-        'read_at' => $book->read_at ? null : date("y-m-d"),
-    ]);
-
-}
+        $book->update([
+            'read_at' => $book->read_at ? null : date("y-m-d"),
+        ]);
+    }
 
     /**
      * Display the specified resource.
@@ -87,9 +90,26 @@ class BooksController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Book $book)
     {
-        //
+        $validated = $request->validate(
+            [
+                'title' => [
+                    'required',
+                    'string',
+                    'max:50',
+                    Rule::unique('books')->where(function ($query) use ($request) {
+                        return $query->where('author', $request->author);
+                    })->ignore($book->id),
+                ],
+                'author' => ['required', 'string', 'max:50'],
+                'read_at' => ['nullable', 'date']
+            ],
+            ['title.unique' => 'This book is already in your library']
+        );
+
+        $book->update($validated);
+        return redirect()->route('books.index');
     }
 
     /**

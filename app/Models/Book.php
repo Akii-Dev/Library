@@ -14,4 +14,8 @@ class Book extends Model
         'author',
         'read_at'
     ];
+
+    protected $casts = [
+        'read_at' => 'datetime'
+    ];
 }
