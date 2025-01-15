@@ -70,6 +70,8 @@ class BooksController extends Controller
                     Borrower::create($borrower);
                 }
             }
+
+            return redirect()->route('books.index');
     }
 
     /**

@@ -14,19 +14,19 @@
             @for ($i = 1; $i <= 5; $i++)
                 <div class="flex justify-around">
                     <div>
-                        <input class="rounded-md outline outline-1 m-0.5 p-0.5 text-sm w-52" type="text" name="borrowers[{{$i}}][name]" value="{{old("borrowers.$i.name")}}">
+                        <input class="rounded-md outline outline-1 mx-0.5 mt-1 p-0.5 text-sm w-52" type="text" name="borrowers[{{$i}}][name]" value="{{old("borrowers.$i.name")}}">
                         @error("borrowers.$i.name")
                             <p class="text-red-500 mb-1 text-center">{{$message}}</p>
                         @enderror
                     </div>
                     <div>
-                        <input class="rounded-md outline outline-1 m-0.5 p-0.5 text-sm w-52" type="email" name="borrowers[{{$i}}][email]" value="{{old("borrowers.$i.email")}}">
+                        <input class="rounded-md outline outline-1 mx-0.5 mt-1 p-0.5 text-sm w-52" type="email" name="borrowers[{{$i}}][email]" value="{{old("borrowers.$i.email")}}">
                         @error("borrowers.$i.email")
                             <p class="text-red-500 mb-1 text-center">{{$message}}</p>
                         @enderror
                     </div>
                     <div>
-                        <input class="rounded-md outline outline-1 m-0.5 p-0.5 text-sm w-52" type="tel" name="borrowers[{{$i}}][phone_number]" value="{{old("borrowers.$i.phone_number")}}">
+                        <input class="rounded-md outline outline-1 mx-0.5 mt-1 p-0.5 text-sm w-52" type="tel" name="borrowers[{{$i}}][phone_number]" value="{{old("borrowers.$i.phone_number")}}">
                         @error("borrowers.$i.phone_number")
                             <p class="text-red-500 mb-1 text-center">{{$message}}</p>
                         @enderror
