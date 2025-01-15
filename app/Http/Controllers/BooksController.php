@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Borrower;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
@@ -30,6 +31,45 @@ class BooksController extends Controller
     public function borrowers()
     {
         return view('books.borrowers');
+    }
+
+    public function borrowersStore(Request $request)
+    {
+        $validated = $request->validate(
+            [
+                'borrowers.*.name' => [
+                    'nullable',
+                    'string',
+                    'max:50',
+                    'required_with:borrowers.*.email,borrowers.*.phone_number'
+                ],
+
+                'borrowers.*.email' => [
+                    'nullable',
+                    'email',
+                    'max:100',
+                    'required_with:borrowers.*.name,borrowers.*.phone_number'
+                ],
+
+                'borrowers.*.phone_number' => [
+                    'nullable',
+                    'regex:/^06\d{8}$/',
+                    'required_with:borrowers.*.name,borrowers.*.email'
+                ],
+            ],
+            [
+            'borrowers.*.name.required_with' => 'Missing name',
+            'borrowers.*.name.max' => 'Name is too long',
+            'borrowers.*.email.required_with' => 'Missing email',
+            'borrowers.*.email.email' => 'Invalid email',
+            'borrowers.*.phone_number.required_with' => 'Missing phone number',
+            'borrowers.*.phone_number.regex' => 'Invalid number'
+            ]);
+            foreach ($validated['borrowers'] as $borrower) {
+                if ($borrower["name"] !== null) {
+                    Borrower::create($borrower);
+                }
+            }
     }
 
     /**
