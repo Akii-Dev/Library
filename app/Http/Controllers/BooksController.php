@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DeleteBookRequest;
+use App\Http\Requests\StoreBookRequest;
+use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
 use App\Models\Borrower;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class BooksController extends Controller
 {
@@ -77,30 +82,15 @@ class BooksController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        $validated = $request->validate(
-            [
-                'title' => [
-                    'required',
-                    'string',
-                    'max:50',
-                    Rule::unique('books')->where(function ($query) use ($request) {
-                        return $query->where('author', $request->author);
-                    }),
-                ],
-                'author' => ['required', 'string', 'max:50']
-            ],
-            ['title.unique' => 'This book is already in your library']
-        );
+    public function store(StoreBookRequest $request): RedirectResponse
+{
+    Book::create($request->validated());
 
-        Book::create([
-            'title' => $validated["title"],
-            'author' => $validated["author"],
-        ]);
+    session()->flash('status', "$request->title posted successfully!");
 
-        return redirect()->route('books.index');
-    }
+    return redirect()->route('books.index');
+}
+
 
     public function toggleRead(Request $request)
     {
@@ -137,36 +127,22 @@ class BooksController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Book $book)
+    public function update(UpdateBookRequest $request , Book $book): RedirectResponse
     {
-        $validated = $request->validate(
-            [
-                'title' => [
-                    'required',
-                    'string',
-                    'max:50',
-                    Rule::unique('books')->where(function ($query) use ($request) {
-                        return $query->where('author', $request->author);
-                    })->ignore($book->id),
-                ],
-                'author' => ['required', 'string', 'max:50'],
-                'read_at' => ['nullable', 'date']
-            ],
-            ['title.unique' => 'This book is already in your library']
-        );
+        
+        $book->update($request->validated());
 
-        $book->update($validated);
         session()->flash('status', "$book->title updated successfully!");
-
+    
         return redirect()->route('books.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Book $book)
+    public function destroy(DeleteBookRequest $request, Book $book): RedirectResponse
     {
-        $book->delete();
+        $book->delete($request->validated());
 
         session()->flash('status', "$book->title deleted successfully!");
         return redirect()->route('books.index');
