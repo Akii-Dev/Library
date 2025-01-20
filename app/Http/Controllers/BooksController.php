@@ -142,7 +142,7 @@ class BooksController extends Controller
      */
     public function destroy(DeleteBookRequest $request, Book $book): RedirectResponse
     {
-        $book->delete($request->validated());
+        $book->delete();
 
         session()->flash('status', "$book->title deleted successfully!");
         return redirect()->route('books.index');

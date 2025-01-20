@@ -22,7 +22,7 @@ class DeleteBookRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => ['required', 'exists:books,id']
+            // due to model binding this isn't required
         ];
     }
 }
