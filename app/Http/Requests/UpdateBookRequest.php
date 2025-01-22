@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class UpdateBookRequest extends FormRequest
@@ -12,7 +13,9 @@ class UpdateBookRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $book = $this->route("book");
+
+        return $book && $book->user_id === Auth::id();
     }
 
     /**

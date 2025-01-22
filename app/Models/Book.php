@@ -19,3 +19,4 @@ class Book extends Model
         'read_at' => 'datetime'
     ];
 }
+

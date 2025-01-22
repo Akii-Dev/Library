@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class DeleteBookRequest extends FormRequest
 {
@@ -11,7 +12,9 @@ class DeleteBookRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $book = $this->route("book");
+
+        return $book && $book->user_id === Auth::id();
     }
 
     /**
