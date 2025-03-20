@@ -17,7 +17,7 @@
                 <label for="author" class="text-gray-600 font-bold mb-2 mt-4">Author</label>
 
                 <input class="bg-orange-100  h-8 rounded-lg" type="text" name="author" id="author"
-                    value="{{ $book->title }}">
+                    value="{{ $book->author }}">
                 @error('author')
                     <p class="text-red-500">{{ $message }}</p>
                 @enderror
