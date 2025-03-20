@@ -12,9 +12,7 @@ class DeleteBookRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $book = $this->route("book");
-
-        return $book && $book->user_id === Auth::id();
+        return true;
     }
 
     /**
